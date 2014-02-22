@@ -2,23 +2,79 @@ nnoremap <silent> <Plug>UnthreadLast  :<C-U>set opfunc=<SID>unthread_last<CR>g@
 xnoremap <silent> <Plug>UnthreadLast  :<C-U>call <SID>unthread_last(visualmode())<CR>
 nnoremap <silent> <Plug>ThreadFirst   :<C-U>set opfunc=<SID>thread_first<CR>g@
 xnoremap <silent> <Plug>ThreadFirst   :<C-U>call <SID>thread_first(visualmode())<CR>
+nnoremap <silent> <Plug>ThreadLast   :<C-U>set opfunc=<SID>thread_last<CR>g@
+xnoremap <silent> <Plug>ThreadLast   :<C-U>call <SID>thread_last(visualmode())<CR>
+
+nnoremap <silent> <Plug>CyclePrivacy   :<C-U>set opfunc=<SID>cycle_privacy<CR>g@
+xnoremap <silent> <Plug>CyclePrivacy   :<C-U>call <SID>cycle_privacy(visualmode())<CR>
+
+nnoremap <silent> <Plug>CycleCollection   :<C-U>set opfunc=<SID>cycle_collection<CR>g@
+xnoremap <silent> <Plug>CycleCollection   :<C-U>call <SID>cycle_collection(visualmode())<CR>
+
+nnoremap <silent> <Plug>CycleStrKeyword   :<C-U>set opfunc=<SID>cycle_str_keyword<CR>g@
+xnoremap <silent> <Plug>CycleStrKeyword   :<C-U>call <SID>cycle_str_keyword(visualmode())<CR>
+
+
 
 nmap <buffer> cru <Plug>UnthreadLast
 nmap <buffer> cruu <Plug>UnthreadLastab
 
-function! s:refactor(type, op)
+nmap <buffer> crf <Plug>ThreadFirst
+nmap <buffer> crff <Plug>ThreadFirstab
+
+nmap <buffer> crl <Plug>ThreadLast
+nmap <buffer> crll <Plug>ThreadLastab
+
+nmap <buffer> crp <Plug>CyclePrivacy
+nmap <buffer> crpp <Plug>CyclePrivacyab
+
+nmap <buffer> crc <Plug>CycleCollection
+nmap <buffer> crcc <Plug>CycleCollectionab
+
+nmap <buffer> crk  <Plug>CycleStrKeyword
+nmap <buffer> crkk <Plug>CycleStrKeywordab
+
+
+
+"nmap <buffer> crt <Plug>Thread
+"nmap <buffer> crtt <Plug>FireplaceThreadab
+
+function! s:refactor(type, refactor)
   let expr = s:opfunc(a:type)
-  let newexpr = fireplace#message({"op": a:op, "code": expr})[0].value
+  let newexpr = fireplace#message({"op": "nrepl.refactor",
+        \ "refactor": a:refactor,
+        \ "code": expr})[0].value
   return s:replace(expr, newexpr)
 endfunction
 
 function! s:unthread_last(type)
-  return s:refactor(a:type, "refactor.unthread-last")
+  return s:refactor(a:type, "unthread-last")
 endfunction
 
 function! s:thread_first(type)
-  return s:refactor(a:type, "refactor.thread-first")
+  return s:refactor(a:type, "thread-first")
 endfunction
+
+function! s:thread_last(type)
+  return s:refactor(a:type, "thread-last")
+endfunction
+
+function! s:cycle_privacy(type)
+  return s:refactor(a:type, "cycle-privacy")
+endfunction
+
+function! s:cycle_collection(type)
+  return s:refactor(a:type, "cycle-collection-type")
+endfunction
+
+function! s:cycle_str_keyword(type)
+  return s:refactor(a:type, "cycle-str-keyword")
+endfunction
+
+
+
+
+
 
 " direct rip from saint tpope's fireplace
 function! s:opfunc(type) abort                                                  
