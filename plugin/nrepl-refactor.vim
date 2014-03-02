@@ -1,7 +1,9 @@
 nnoremap <silent> <Plug>UnthreadLast  :<C-U>set opfunc=<SID>unthread_last<CR>g@
 xnoremap <silent> <Plug>UnthreadLast  :<C-U>call <SID>unthread_last(visualmode())<CR>
+
 nnoremap <silent> <Plug>ThreadFirst   :<C-U>set opfunc=<SID>thread_first<CR>g@
 xnoremap <silent> <Plug>ThreadFirst   :<C-U>call <SID>thread_first(visualmode())<CR>
+
 nnoremap <silent> <Plug>ThreadLast   :<C-U>set opfunc=<SID>thread_last<CR>g@
 xnoremap <silent> <Plug>ThreadLast   :<C-U>call <SID>thread_last(visualmode())<CR>
 
@@ -14,25 +16,23 @@ xnoremap <silent> <Plug>CycleCollection   :<C-U>call <SID>cycle_collection(visua
 nnoremap <silent> <Plug>CycleStrKeyword   :<C-U>set opfunc=<SID>cycle_str_keyword<CR>g@
 xnoremap <silent> <Plug>CycleStrKeyword   :<C-U>call <SID>cycle_str_keyword(visualmode())<CR>
 
+nmap cru <Plug>UnthreadLast
+nmap cruu <Plug>UnthreadLastab
 
+nmap crf <Plug>ThreadFirst
+nmap crff <Plug>ThreadFirstab
 
-nmap <buffer> cru <Plug>UnthreadLast
-nmap <buffer> cruu <Plug>UnthreadLastab
+nmap  crl <Plug>ThreadLast
+nmap  crll <Plug>ThreadLastab
 
-nmap <buffer> crf <Plug>ThreadFirst
-nmap <buffer> crff <Plug>ThreadFirstab
+nmap  crp <Plug>CyclePrivacy
+nmap  crpp <Plug>CyclePrivacyab
 
-nmap <buffer> crl <Plug>ThreadLast
-nmap <buffer> crll <Plug>ThreadLastab
+nmap  crc <Plug>CycleCollection
+nmap  crcc <Plug>CycleCollectionab 
 
-nmap <buffer> crp <Plug>CyclePrivacy
-nmap <buffer> crpp <Plug>CyclePrivacyab
-
-nmap <buffer> crc <Plug>CycleCollection
-nmap <buffer> crcc <Plug>CycleCollectionab
-
-nmap <buffer> crk  <Plug>CycleStrKeyword
-nmap <buffer> crkk <Plug>CycleStrKeywordab
+nmap  crk  <Plug>CycleStrKeyword
+nmap  crkk <Plug>CycleStrKeywordab
 
 
 
